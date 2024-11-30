@@ -6,5 +6,5 @@ Statistics Canada has reissued what was historically known as its Consolidated G
 
 ## References
 
-1. Statistics Canada. Table 10-10-0005-01 Canadian Classification of Functions of Government (CCOFOG) by consolidated government component (x 1,000,000). Published online 2020.
-2. Dutton DJ, Forest PG, Kneebone RD, Zwicker JD. Effect of provincial spending on social services and health care on health outcomes in Canada: an observational longitudinal study. *CMAJ*. 2018;190(3):E66-E71.
+[^1]: Statistics Canada. Table 10-10-0005-01 Canadian Classification of Functions of Government (CCOFOG) by consolidated government component (x 1,000,000). Published online 2020.
+[^2]: Dutton DJ, Forest PG, Kneebone RD, Zwicker JD. Effect of provincial spending on social services and health care on health outcomes in Canada: an observational longitudinal study. *CMAJ*. 2018;190(3):E66-E71.
