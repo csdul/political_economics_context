@@ -9,10 +9,23 @@
 					>> Macroeconomic indicators
 						- Gini coefficient
 							> Adjusted after-tax income
+							> The Gini coefficient is a number between zero and one that measures the relative 
+									degree of inequality in the distribution of income. The coefficient would 
+									register zero (minimum inequality) for a population in which each person 
+									received exactly the same adjusted household income and it would register 
+									a coefficient of one (maximum inequality) if one person received all the 
+									adjusted household income and the rest received none. Even though a single 
+									Gini coefficient value has no simple interpretation, comparisons of the 
+									level over time or between populations are very straightforward: the 
+									higher the coefficient, the higher the inequality of the distribution.
 							> Source: Statistics Canada
 								- Table: 11-10-0134-01
 						- Unemployment rate
 							> Among those aged 15 years and over
+							> The unemployment rate is the number of unemployed persons expressed as a percentage 
+									of the labour force. The unemployment rate for a particular group (age, gender, marital 
+									status, etc.) is the number unemployed in that group expressed as a percentage of the labour 
+									force for that group.
 							> Source: Statistics Canada
 								- Table: 14-10-0327-01
 						- Median after-tax income
@@ -59,14 +72,33 @@
 */
 	/**********************************************************************************************************************************/
 	/*
-		SECTION 1: Setup - current year & data source url
+		SECTION 1: Setup - current year, data source url and pathway to the project folder
 	*/
-/**********************************************************************************************************************************/
+	/**********************************************************************************************************************************/
 	/* Set to current year */
 	global current_year = substr("`c(current_date)'", -4, 4)
 	
 	/* Set general web url */
+	/* Note: This URL to Statistics Canada's website may not work for one of the following reasons:
+			1) It is likely that Statistics Canada analysts are updating the datasets. If so, 
+					please wait a few hours and try running the code again.
+			
+			2) If the issue persists, visit the Statistics Canada website 
+					and search for the table name directly using the search 
+					box, in case the URL has changed.
+	*/
 	global StatCan "https://www150.statcan.gc.ca/t1/tbl1/en/dtl!downloadDbLoadingData.action?"
+	
+	/* Set pathway to the folder of which the datasets will be saved in */
+	/* Note: You can update the main path below to point to your own folder if needed */
+	/* Note: The datasets will be saved in two separate folders:
+			1) Macroeconomic_indicators
+		  		- main folder => Data => Macroeconomic_indicators
+			2) CCOFOG
+		 		- main folder => Data => CCOFOG
+	*/
+	global pathway "/Users/yangtianjiao/Library/CloudStorage/OneDrive-DalhousieUniversity/CSDUL/CSDUL_Google_upload/Github_uploads/Data"
+	dis "${pathway}"
 	
 
 	
@@ -75,27 +107,27 @@
 	/*
 		SECTION 2: Data Loading - Macroeconomic Indicators & CCOFOG
 	*/
-/**********************************************************************************************************************************/
+	/**********************************************************************************************************************************/
 	/*
 	  Secontion 2.1: Macroeconomic Indicators:
 	*/
 	/* Gini Coefficient */
-	copy "${StatCan}pid=1110013401&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B7%2C8%2C13%5D%2C%5B3%5D%5D&checkedLevels=0D3" "Gini_coefficient.csv", replace
+	copy "${StatCan}pid=1110013401&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B7%2C8%2C13%5D%2C%5B3%5D%5D&checkedLevels=0D3" "${pathway}/Macroeconomic_indicators/Gini_coefficient.csv", replace
 
 	/* Unemployment Rate */
-	copy "${StatCan}pid=1410032701&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B%5D%2C%5B8%5D%2C%5B%5D%2C%5B1%5D%5D&checkedLevels=0D2%2C2D1" "Unemployment_rate.csv", replace
+	copy "${StatCan}pid=1410032701&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B%5D%2C%5B8%5D%2C%5B%5D%2C%5B1%5D%5D&checkedLevels=0D2%2C2D1" "${pathway}/Macroeconomic_indicators/Unemployment_rate.csv", replace
 	
 	/* Median After-tax Income */
-	copy "${StatCan}pid=1110023701&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B7%2C8%2C13%5D%2C%5B3%5D%2C%5B1%5D%2C%5B20%5D%5D&checkedLevels=0D3" "Median_after_tax_income.csv", replace
+	copy "${StatCan}pid=1110023701&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B7%2C8%2C13%5D%2C%5B3%5D%2C%5B1%5D%2C%5B20%5D%5D&checkedLevels=0D3" "${pathway}/Macroeconomic_indicators/Median_after_tax_income.csv", replace
 
 	/* Gross Domestic Product (GDP) */
-	copy "${StatCan}pid=3610022101&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%5D%2C%5B14%5D%5D&checkedLevels=" "GDP.csv", replace
+	copy "${StatCan}pid=3610022101&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%5D%2C%5B14%5D%5D&checkedLevels=" "${pathway}/Macroeconomic_indicators/GDP.csv", replace
 
 	/* Consumer Price Index - All Item */
-	copy "${StatCan}pid=1810000501&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B3%2C5%2C7%2C9%2C11%2C14%2C18%2C20%2C23%2C26%5D%2C%5B2%5D%5D&checkedLevels=" "CPI.csv", replace
+	copy "${StatCan}pid=1810000501&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B3%2C5%2C7%2C9%2C11%2C14%2C18%2C20%2C23%2C26%5D%2C%5B2%5D%5D&checkedLevels=" "${pathway}/Macroeconomic_indicators/CPI.csv", replace
 	
 	/* Consumer Price Index - General governments final consumption expenditure */
-	copy "${StatCan}pid=3610022301&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%5D%2C%5B1%5D%2C%5B9%5D%5D&checkedLevels=" "CPI_govt_exp.csv", replace
+	copy "${StatCan}pid=3610022301&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%5D%2C%5B1%5D%2C%5B9%5D%5D&checkedLevels=" "${pathway}/Macroeconomic_indicators/CPI_govt_exp.csv", replace
 
 	
 	/*************************************************************************/
@@ -104,7 +136,7 @@
 	*/
 	
 	/* CCOFOG */
-	copy "${StatCan}pid=1010000501&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%5D%2C%5B2%5D%2C%5B%5D%5D&checkedLevels=2D1%2C2D2" "CCOFOG.csv", replace
+	copy "${StatCan}pid=1010000501&latestN=0&startDate=20080101&endDate=${current_year}0101&csvLocale=en&selectedMembers=%5B%5B2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%5D%2C%5B2%5D%2C%5B%5D%5D&checkedLevels=2D1%2C2D2" "${pathway}/CCOFOG/CCOFOG.csv", replace
 	
 	
 	
@@ -113,7 +145,7 @@
 	/*
 		SECTION 3: Data Cleaning and Merging 
 	*/
-/**********************************************************************************************************************************/
+	/**********************************************************************************************************************************/
 	/* 
 		Section 3.1: Macroeconomic indicators
 				> Load, clean and save
@@ -122,11 +154,11 @@
 			{
 				dis "`indicator'" 						/* Display the current indicator that is being processed */
 				
-				import delimited "`indicator'", clear   /* Import the downloaded dataset */
+				import delimited "${pathway}/Macroeconomic_indicators/`indicator'", clear   /* Import the downloaded dataset */
 				
 				keep geo ref_date value 				/* Keep only province, year, and key variable */
 				
-				rename value `indicator' 				/* Rename the key var to its name */
+				rename value `indicator' 				/* Rename the key variable to its name */
 				
 				encode geo, gen(province) 				/* Destring province variable - geo */
 				drop geo 
@@ -134,13 +166,16 @@
 				rename ref_date year 					/* Rename */
 				
 				/* Save each excel spreadsheet in the form of Stata file - dta */
-				qui: save "${pathway}`indicator'.dta", replace
+				/* Quietly save the file in the 'Macroeconomic_indicators' folder, located 
+						within the 'Data' directory of the project folder 
+				*/
+				qui: save "${pathway}/Macroeconomic_indicators/`indicator'.dta", replace
 	}
 	
-	/* Merge */
+	/* Merge the individual data files into a single consolidated file */
 	foreach indicator_saved in "Gini_coefficient" "Unemployment_rate" "Median_after_tax_income" "GDP" "CPI" "CPI_govt_exp" {
 				
-					merge 1:1 year province using "${pathway}`indicator_saved'.dta"
+					merge 1:1 year province using "${pathway}/Macroeconomic_indicators/`indicator_saved'.dta"
 					drop _merge
 			}
 	
@@ -150,9 +185,12 @@
 	/* Reorder */
 	order year province Gini_coefficient Unemployment_rate Median_after_tax_income GDP CPI CPI_govt_exp
 	
-	/* Save the dataset */
-	export excel "Macroeconomic_indicators.xlsx", firstrow(variables) replace 
-	save "Macroeconomic_indicators.dta", replace
+	/* Save the dataset in both Excel (.xlsx) and Stata (.dta) formats 
+			in the 'Macroeconomic_indicators' folder, located 
+			within the 'Data' directory of the project folder  
+	*/
+	export excel "${pathway}/Macroeconomic_indicators/Macroeconomic_indicators.xlsx", firstrow(variables) replace  /* Excel */
+	save "${pathway}/Macroeconomic_indicators/Macroeconomic_indicators.dta", replace							   /* dta */
 	
 	
 	/*************************************************************************/
@@ -160,7 +198,8 @@
 		Section 3.2: CCOFOG
 				> Load, clean, reshape, rename and save
 	*/
-	import delimited "CCOFOG.csv", clear
+	/* Import the dataset from the 'CCOFOG' folder */
+	import delimited "${pathway}/CCOFOG/CCOFOG.csv", clear
 	
 	/* Keep only necessary variables */
 	keep geo ref_date value canadianclassificationoffunction
@@ -169,10 +208,13 @@
 	encode geo, gen(province)
 	drop geo
 	
+	/* Rename variable ref_date as 'year' */
 	rename ref_date year
 	
+	/* Extract only the digits contained within the square brackets in the variable 'canadianClassificationOfFunction' */
 	gen code = substr(canadianclassificationoffunction, strpos(canadianclassificationoffunction, "[") + 1, strpos(canadianclassificationoffunction, "]") - strpos(canadianclassificationoffunction, "[") - 1)
 	
+	/* Destring */
 	encode code, gen(code_new)
 
 	tab code_new canadianclassificationoffunction
@@ -183,66 +225,66 @@
 	
 	/* Rename variables */
 	rename value1 	general_public_services_701
-	rename value2 	gps_7011
+	rename value2 	gps_7011 						/* Executive and legislative organs, finacial and fiscal affairs and external affairs */
 	rename value3 	foreign_economic_aid_7012
 	rename value4 	general_services_7013
 	rename value5 	basic_esearch_7014
 	rename value6 	public_debt_transactions_7017
-	rename value7   gps_nec_7015_16_18
+	rename value7   gps_nec_7015_16_18 				/* General public services not elsewhere classified [7015, 7016, 7018] */
 	
 	rename value8 	defence_702
 	rename value9 	military_defence_7021
 	rename value10 	civil_defence_7022
 	rename value11 	foreign_military_aid_7023
-	rename value12  defence_nec_7024_25
+	rename value12  defence_nec_7024_25				/* Defence not elsewhere classified [7024, 7025] */
 	
 	rename value13  public_order_and_safety_703
 	rename value14  police_services_7031
 	rename value15  fire_protection_services_7032
 	rename value16  law_courts_7033
 	rename value17  prisons_7034
-	rename value18  pos_nec_7035_36
+	rename value18  pos_nec_7035_36					/* Public order and safety not elsewhere classified [7035, 7036] */
 	
 	rename value19  economic_affairs_704
-	rename value20  general_ecl_affairs_7041
-	rename value21  agri_fore_fish_hunt_7042
-	rename value22  fuel_and_energy_7043
-	rename value23  mining_manu_construction_7044
+	rename value20  general_ecl_affairs_7041 		/* General economic, commercial, and labor affairs */
+	rename value21  agri_fore_fish_hunt_7042 		/* Agriculture, foresty, fishing, and hunting */
+	rename value22  fuel_and_energy_7043	
+	rename value23  mining_manu_construction_7044 	/* Mining, manufacturing, and construction */
 	rename value24  transport_7045
-	rename value25	economic_affairs_nec_7046to7049
+	rename value25	economic_affairs_nec_7046to7049 /* Economic affairs not elsewhere classified [7046, 7047, 7048, 7049] */
 	
 	rename value26  environmental_protection_705
 	rename value27  waste_management_7051
 	rename value28  waster_water_management_7052
 	rename value29  pollution_abatement_7053
-	rename value30  protection_of_bandl_7054
-	rename value31  envir_protection_nec_7055_56
+	rename value30  protection_of_bandl_7054 		/* Protection of biodiversity and landscape */
+	rename value31  envir_protection_nec_7055_56 	/* Environmental protection not elsewhere classified [7055, 7056] */
 	
 	rename value32  housing_and_commu_amenities_706
-	rename value33  h_and_c_development_7061_62
+	rename value33  h_and_c_development_7061_62 	/* Housing and community development [7061, 7062] */
 	rename value34  water_supply_7063
 	rename value35  street_lighting_7064
-	rename value36  h_and_c_ammenities_nec_7065_66
+	rename value36  h_and_c_ammenities_nec_7065_66  /* Housing and community amenities not elsewhere classified [7065, 7066] */
 	
 	
 	rename value37  health_707
-	rename value38  med_pae_7071 /* Medical products, appliances, and equipment [7071] */
+	rename value38  med_pae_7071 					/* Medical products, appliances, and equipment [7071] */
 	rename value39  outpatient_services_7072
 	rename value40  hospital_services_7073
 	rename value41  public_health_services_7074
-	rename value42  health_nec_7075_76
+	rename value42  health_nec_7075_76 				/* Health not elsewhere classified [7075, 7076] */
 	
-	rename value43  rcr_708 /* Recreation, culture and religion */
-	rename value44  r_and_sporting_services_7081 /* Recreational and sporting services */
+	rename value43  rcr_708 						/* Recreation, culture and religion */
+	rename value44  r_and_sporting_services_7081 	/* Recreational and sporting services */
 	rename value45  cultural_services_7082
-	rename value46	b_and_p_services_7083 /* Broadcasting and publishing services */
-	rename value47  rcr_nec_7084to7086 /* Recreation, culture, and religion not elsewhere classified */
+	rename value46	b_and_p_services_7083 			/* Broadcasting and publishing services */
+	rename value47  rcr_nec_7084to7086 				/* Recreation, culture, and religion not elsewhere classified [7084,7085,7086] */
 	
 	rename value48  education_709
-	rename value49  primary_and_secondary_edu_7092
+	rename value49  primary_and_secondary_edu_7092  /* Primary and secondary education */
 	rename value50	college_education_7093
 	rename value51	university_education_7094
-	rename value52	education_nec_7095to7098
+	rename value52	education_nec_7095to7098 		/* Education not elsewhere classified [7095, 7096, 7097, 7098] */
 	
 	rename value53	social_protection_710
 	rename value54	sickness_and_disability_7101_03
@@ -251,31 +293,31 @@
 	rename value57	unemployement_7105
 	rename value58  housing_7106
 	rename value59	social_exclusion_7107
-	rename value60	social_protection_nec_7108_09
+	rename value60	social_protection_nec_7108_09 	/* Social protection not elsewhere classified [7108, 7109] */
 	
+	/* A description of all variables in the dataset after renaming */
 	describe
 
 	/* Save the cleaned dataset in two forms (xlsx and dta) */
-	export excel "CCOFOG.xlsx", firstrow(variables) replace 
-	save "CCOFOG.dta", replace
+	export excel "${pathway}/CCOFOG/CCOFOG.xlsx", firstrow(variables) replace /* Excel */
+	save "${pathway}/CCOFOG/CCOFOG.dta", replace							  /* dta */
 	
 	/*************************************************************************/
 	/*
 		Section 3.3: Merging Macroeconomic_indicators.dta with CCOFOG.dta
 	*/
-	merge 1:1 year province using "Macroeconomic_indicators.dta"
+	merge 1:1 year province using "${pathway}/Macroeconomic_indicators/Macroeconomic_indicators.dta"
 	drop _merge
 	
 	/* Sort the dataset by province and year*/
 	sort province year
 	
 	/* Save the final dataset in two forms (xlsx and dta) */
-	save "Macroeconomic_indicators_and_CCOFOG.dta", replace
-	export excel "Macroeconomic_indicators_and_CCOFOG.xlsx", replace
+	export excel "${pathway}/Macroeconomic_indicators_and_CCOFOG.xlsx", replace /* Excel */
+	save "${pathway}/Macroeconomic_indicators_and_CCOFOG.dta", replace 			/* dta */
 	
 	/*
 	tab province 
 	tab year
 	describe
 	*/
-
