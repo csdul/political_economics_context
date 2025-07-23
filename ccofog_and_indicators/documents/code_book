@@ -1,0 +1,34 @@
+CSDUL - Node 1 Codebook
+---------------------------------------------------------------------------------------------------
+I. Macroeconomic Indicators
+	1. Gini coefficient - adjusted after-tax income
+		> A number between zero and one that measures the relative 
+			degree of inequality in the distribution of income. The coefficient would 
+			register zero (minimum inequality) for a population in which each person 
+			received exactly the same adjusted household income and it would register 
+			a coefficient of one (maximum inequality) if one person received all the 
+			adjusted household income and the rest received none. Even though a single 
+			Gini coefficient value has no simple interpretation, comparisons of the 
+			level over time or between populations are very straightforward: the 
+			higher the coefficient, the higher the inequality of the distribution.
+
+	2. Unemployment rate - among those aged 15 years and over
+		> The number of unemployed persons expressed as a percentage 
+			of the labour force. The unemployment rate for a particular group (age, 
+			gender, marital status, etc.) is the number unemployed in that group 
+			expressed as a percentage of the labour force for that group.
+	3. Median after-tax income (in 2023 constant dollars)
+
+	4. Gross domestic product (GDP) - at market prices (in 1,000,000 dollars)
+
+	5. Consumer price index (CPI) - all items (in 2002 constant dollars)
+
+	6. Consumer price index (CPI) - general governments final consumption expenditure (in 2017 constant dollars)
+
+---------------------------------------------------------------------------------------------------
+II. Canadian Classification of Functions of Government (CCOFOG)
+	> Government expenditures classified by the use
+	> In 1,000,000 dollars
+	> Current dollars - not adjusted for inflation 
+
+
