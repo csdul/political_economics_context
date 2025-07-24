@@ -4,6 +4,7 @@
 
 ## List of Indicators
 - [Support Documents](https://drive.google.com/drive/folders/1lEJ5xI5_i3pKs8RMnEE1GHiR9o3ADfU8)
+- [CCOFOG and Macroindicators](https://github.com/csdul/pre_beta_political_economics_context/tree/main/ccofog_and_indicators)
 
 ## References
 [^1]: Statistics Canada. Table 10-10-0005-01 Canadian Classification of Functions of Government (CCOFOG) by consolidated government component (x 1,000,000). Published online 2020.
