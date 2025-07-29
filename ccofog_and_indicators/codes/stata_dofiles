@@ -313,8 +313,8 @@
 	sort province year
 	
 	/* Save the final dataset in two forms (xlsx and dta) */
-	export excel "${pathway}/Macroeconomic_indicators_and_CCOFOG.xlsx", replace /* Excel */
-	save "${pathway}/Macroeconomic_indicators_and_CCOFOG.dta", replace 			/* dta */
+	export excel "${pathway}/macroeconomic_indicators_and_ccofog.xlsx", replace /* Excel */
+	save "${pathway}/macroeconomic_indicators_and_ccofog.dta", replace 			/* dta */
 	
 	/*
 	tab province 
