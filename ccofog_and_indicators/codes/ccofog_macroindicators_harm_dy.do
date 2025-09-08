@@ -3,8 +3,8 @@
   Author: Daniel Yupanqui
   First update (MM-DD-YY): 09-08-2025
   Last update  (MM-DD-YY): 09-08-2025
-  Task: Simplifying the CCOFOG and Macroindicators dofile, for import and 
-        process the data stored in the Data section in CDUL-OUT.		
+  Task: Simplifying the CCOFOG and Macroindicators do-file to streamline the
+        import and processing of data stored in the CDUL-OUT Data section.		
 *******************************************************************************/
 
 *0. Set
@@ -223,3 +223,4 @@
  *Save the final dataset in dta
   save "results/macroeconomic_indicators_and_ccofog.dta", replace 				
 }
+
